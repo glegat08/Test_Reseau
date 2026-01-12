@@ -12,7 +12,7 @@ int main(int argc, char **argv)
 	WSADATA wsaData;
 	int iResult;
 	int recvbuflen = DEFAULT_BUFLEN;
-	const char* sendbuf = "this is a test";
+	const char* sendbuf = "toto";
 	char recvbuf[DEFAULT_BUFLEN];
 
 	iResult = WSAStartup(MAKEWORD(2, 2), &wsaData);
@@ -24,11 +24,11 @@ int main(int argc, char **argv)
 
 	struct addrinfo* result = NULL, * ptr = NULL, hints;
 	ZeroMemory(&hints, sizeof(hints));
-	hints.ai_family = AF_UNSPEC;
+	hints.ai_family = AF_INET;
 	hints.ai_socktype = SOCK_STREAM;
 	hints.ai_protocol = IPPROTO_TCP;
 
-	iResult = getaddrinfo(argv[1], DEFAULT_PORT, &hints, &result);
+	iResult = getaddrinfo("10.4.113.85", DEFAULT_PORT, &hints, &result);
 	if (iResult != 0)
 	{
 		printf("getaddrinfo failed: %d\n", iResult);
@@ -71,7 +71,7 @@ int main(int argc, char **argv)
 		WSACleanup();
 		return 1;
 	}
-	printf("Bytes sent: %ld\n", iResult);
+	printf("Bytes sent: %s\n", sendbuf);
 
 	iResult = shutdown(connectSocket, SD_SEND);
 	if (iResult == SOCKET_ERROR)
@@ -86,7 +86,10 @@ int main(int argc, char **argv)
 	{
 		iResult = recv(connectSocket, recvbuf, recvbuflen, 0);
 		if (iResult > 0)
-			printf("Bytes received: %d\n", iResult);
+		{
+			recvbuf[iResult] = '\0';
+			printf("Bytes received: %s\n", recvbuf);
+		}
 		else if (iResult == 0)
 			printf("Connection closed\n");
 		else
