@@ -12,6 +12,7 @@
 #define DEFAULT_PORT "27015"
 #define DEFAULT_BUFLEN 512
 #define NOE "10.4.113.85"
+#define ME "192.168.1.14"
 
 inline void receiveMessages(SOCKET connectSocket, uint32_t userId)
 {
@@ -60,7 +61,7 @@ inline int startClient()
     hints.ai_socktype = SOCK_STREAM;
     hints.ai_protocol = IPPROTO_TCP;
 
-    iResult = getaddrinfo(NOE, DEFAULT_PORT, &hints, &result);
+    iResult = getaddrinfo(ME, DEFAULT_PORT, &hints, &result);
     if (iResult != 0)
     {
         printf("getaddrinfo failed: %d\n", iResult);
@@ -80,7 +81,7 @@ inline int startClient()
         return 1;
     }
 
-    iResult = connect(connectSocket, ptr->ai_addr, (int)ptr->ai_addrlen);
+    iResult = connect(connectSocket, ptr->ai_addr, static_cast<int>(ptr->ai_addrlen));
     if (iResult == SOCKET_ERROR)
     {
         closesocket(connectSocket);
@@ -111,7 +112,7 @@ inline int startClient()
         }
 
         message += " ";
-        iResult = send(connectSocket, message.c_str(), (int)message.length(), 0);
+        iResult = send(connectSocket, message.c_str(), static_cast<int>(message.length()), 0);
         if (iResult == SOCKET_ERROR)
         {
             printf("send failed: %d\n", WSAGetLastError());
