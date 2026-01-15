@@ -127,12 +127,14 @@
   <ItemGroup>
     <ClCompile Include="Client.cpp" />
     <ClCompile Include="Client.h" />
+    <ClCompile Include="ClientUDP.h" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Serveur.cpp" />
     <ClCompile Include="Threading.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Serveur.h" />
+    <ClInclude Include="ServeurUDP.h" />
     <ClInclude Include="Threading.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

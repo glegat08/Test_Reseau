@@ -30,12 +30,18 @@
     <ClCompile Include="Client.h">
       <Filter>Fichiers de ressources</Filter>
     </ClCompile>
+    <ClCompile Include="ClientUDP.h">
+      <Filter>Fichiers de ressources</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Serveur.h">
       <Filter>Fichiers de ressources</Filter>
     </ClInclude>
     <ClInclude Include="Threading.h">
+      <Filter>Fichiers de ressources</Filter>
+    </ClInclude>
+    <ClInclude Include="ServeurUDP.h">
       <Filter>Fichiers de ressources</Filter>
     </ClInclude>
   </ItemGroup>
